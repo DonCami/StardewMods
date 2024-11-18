@@ -1,0 +1,11 @@
+{
+  "Name": "Treasury Farm",
+  "Author": "Don Cami",
+  "Version": "0.0.3",
+  "Description": "A Treasury Forest Farm.",
+  "UniqueID": "DonCami.TreasuryFarm",
+  "MinimumApiVersion": "4.0.7",
+  "MinimumGameVersion": "1.6.4",
+  "EntryDll": "TreasuryFarm.dll",
+  "UpdateKeys": ["Nexus:26447"]
+}
