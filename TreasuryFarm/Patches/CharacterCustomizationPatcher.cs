@@ -15,10 +15,10 @@ namespace DonCami.Stardew.TreasuryFarm.Patches
         ** Fields
         *********/
         /// <summary>The mod configuration.</summary>
-        private static ModConfig _config = null!; // set in constructor
+        private static ModConfig Config = null!; // set in constructor
 
         /// <summary>The farm type ID for Treasury Farm.</summary>
-        private static string _farmTypeId = null!; // set in constructor
+        private static string FarmTypeId = null!; // set in constructor
 
 
         /*********
@@ -29,8 +29,8 @@ namespace DonCami.Stardew.TreasuryFarm.Patches
         /// <param name="farmTypeId">The farm type ID for Treasury Farm.</param>
         public CharacterCustomizationPatcher(ModConfig config, string farmTypeId)
         {
-            CharacterCustomizationPatcher._config = config;
-            CharacterCustomizationPatcher._farmTypeId = farmTypeId;
+            CharacterCustomizationPatcher.Config = config;
+            CharacterCustomizationPatcher.FarmTypeId = farmTypeId;
         }
 
         /// <inheritdoc />
@@ -52,11 +52,11 @@ namespace DonCami.Stardew.TreasuryFarm.Patches
         [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "The naming convention is defined by Harmony.")]
         private static void After_OptionButtonClick(CharacterCustomization __instance, string name)
         {
-            if (name != $"ModFarm_{CharacterCustomizationPatcher._farmTypeId}")
+            if (name != $"ModFarm_{CharacterCustomizationPatcher.FarmTypeId}")
                 return;
 
             // apply default options
-            Game1.spawnMonstersAtNight = CharacterCustomizationPatcher._config.DefaultSpawnMonstersAtNight;
+            Game1.spawnMonstersAtNight = CharacterCustomizationPatcher.Config.DefaultSpawnMonstersAtNight;
         }
     }
 }

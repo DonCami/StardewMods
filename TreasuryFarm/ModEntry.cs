@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using DonCami.Stardew.TreasuryFarm.Framework;
 using Pathoschild.Stardew.Common;
@@ -53,7 +53,7 @@ namespace DonCami.Stardew.TreasuryFarm
                     isTreasuryFarm: this.IsTreasuryFarm
                 ),
                 new CharacterCustomizationPatcher(
-                    config: this._config,
+                    config: this._config, 
                     farmTypeId: this.ModManifest.UniqueID
                 )
             );
@@ -117,7 +117,7 @@ namespace DonCami.Stardew.TreasuryFarm
                     () =>
                     {
                         // load map
-                        var map = this.Helper.ModContent.Load<Map>("assets/farm.tmx");
+                        var map = this.Helper.ModContent.Load<Map>("assets/treasuryfarm.tmx");
 
                         return map;
                     },

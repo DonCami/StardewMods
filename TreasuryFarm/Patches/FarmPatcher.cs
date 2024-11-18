@@ -16,7 +16,7 @@ namespace DonCami.Stardew.TreasuryFarm.Patches
         ** Fields
         *********/
         /// <summary>The mod configuration.</summary>
-        private static ModConfig _config = null!; // set in constructor
+        private static ModConfig Config = null!; // set in constructor
 
         /// <summary>Get whether the given location is the Giga Farm.</summary>
         private static Func<GameLocation?, bool> IsTreasuryFarm = null!; // set in constructor
@@ -30,7 +30,7 @@ namespace DonCami.Stardew.TreasuryFarm.Patches
         /// <param name="isTreasuryFarm">Get whether the given location is the Giga Farm.</param>
         public FarmPatcher(ModConfig config, Func<GameLocation?, bool> isTreasuryFarm)
         {
-            FarmPatcher._config = config;
+            FarmPatcher.Config = config;
             FarmPatcher.IsTreasuryFarm = isTreasuryFarm;
         }
 

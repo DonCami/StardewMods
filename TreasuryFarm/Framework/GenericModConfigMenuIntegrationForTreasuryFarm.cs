@@ -12,7 +12,7 @@ namespace DonCami.Stardew.TreasuryFarm.Framework
         ** Fields
         *********/
         /// <summary>The Generic Mod Config Menu integration.</summary>
-        private readonly GenericModConfigMenuIntegration<ModConfig> _configMenu;
+        private readonly GenericModConfigMenuIntegration<ModConfig> ConfigMenu;
 
 
         /*********
@@ -27,18 +27,18 @@ namespace DonCami.Stardew.TreasuryFarm.Framework
         /// <param name="saveAndApply">Save and apply the current config model.</param>
         public GenericModConfigMenuIntegrationForTreasuryFarm(IModRegistry modRegistry, IMonitor monitor, IManifest manifest, Func<ModConfig> getConfig, Action reset, Action saveAndApply)
         {
-            this._configMenu = new GenericModConfigMenuIntegration<ModConfig>(modRegistry, monitor, manifest, getConfig, reset, saveAndApply);
+            this.ConfigMenu = new GenericModConfigMenuIntegration<ModConfig>(modRegistry, monitor, manifest, getConfig, reset, saveAndApply);
         }
 
         /// <summary>Register the config menu if available.</summary>
         public void Register()
         {
             // get config menu
-            if (!_configMenu.IsLoaded)
+            if (!ConfigMenu.IsLoaded)
                 return;
 
             // register
-            _configMenu
+            ConfigMenu
                 .Register(titleScreenOnly: true) // configuring in-game would have unintended effects like fores farm logic being half-applied
 
                 // farm options
