@@ -9,8 +9,8 @@
   <property name="FarmHouseWallpaper" value="11"/>
   <property name="ForestEntry" value="126 153"/>
   <property name="Outdoors" value="T"/>
-  <property name="SpawnForestFarmForage" value="T²"/>
-  <property name="Warp" value="155 23 BusStop 11 23 155 24 BusStop 11 23 155 25 BusStop 11 23 125 155 Forest 68 0 126 155 Forest 68 0 127 155 Forest 68 0 40 -1 Backwoods 14 39 41 -1 Backwoods 14 39 34 5 FarmCave 8 11 -1 24 Draylon.GigaFarm_Expansion1 153 105 -1 25 Draylon.GigaFarm_Expansion1 153 106 -1 26 Draylon.GigaFarm_Expansion1 153 107 -1 123 Draylon.GigaFarm_Expansion2 153 47 -1 124 Draylon.GigaFarm_Expansion2 153 48 -1 125 Draylon.GigaFarm_Expansion2 153 49"/>
+  <property name="SpawnForestFarmForage" value="T"/>
+  <property name="Warp" value="155 23 BusStop 11 23 155 24 BusStop 11 23 155 25 BusStop 11 23 125 155 Forest 68 0 126 155 Forest 68 0 127 155 Forest 68 0 40 -1 Backwoods 14 39 41 -1 Backwoods 14 39 34 5 FarmCave 8 11"/>
  </properties>
  <tileset firstgid="1" name="untitled tile sheet" tilewidth="16" tileheight="16" tilecount="1975" columns="25">
   <image source="spring_outdoorsTileSheet" width="400" height="1264"/>
