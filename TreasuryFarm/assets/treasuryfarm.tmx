@@ -10,6 +10,7 @@
   <property name="ForestEntry" value="126 153"/>
   <property name="Outdoors" value="T"/>
   <property name="SpawnForestFarmForage" value="T"/>
+  <property name="Stumps" value="8 32 0 8 51 0 9 27 0 10 56 0 14 25 0 14 29 0 14 51 0 16 55 0"/>
   <property name="Warp" value="155 23 BusStop 11 23 155 24 BusStop 11 23 155 25 BusStop 11 23 125 155 Forest 68 0 126 155 Forest 68 0 127 155 Forest 68 0 40 -1 Backwoods 14 39 41 -1 Backwoods 14 39 34 5 FarmCave 8 11"/>
  </properties>
  <tileset firstgid="1" name="untitled tile sheet" tilewidth="16" tileheight="16" tilecount="1975" columns="25">
