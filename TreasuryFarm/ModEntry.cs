@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using DonCami.Stardew.TreasuryFarm.Framework;
 using Pathoschild.Stardew.Common;
 using Pathoschild.Stardew.Common.Patching;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
 using DonCami.Stardew.TreasuryFarm.Patches;
+using Netcode;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
 using StardewValley.GameData;
 using StardewValley.GameData.Locations;
+using StardewValley.TerrainFeatures;
 using xTile;
 
 namespace DonCami.Stardew.TreasuryFarm
@@ -24,10 +28,10 @@ namespace DonCami.Stardew.TreasuryFarm
         private const string DataFileHash = "db6d8c6fb6cc1554c091430476513727";
 
         /// <summary>The mod configuration.</summary>
-        private ModConfig _config = null!; // set in Entry
+        private ModConfig Config = null!; // set in Entry
 
         /// <summary>The mod's hardcoded data.</summary>
-        private ModData _data = null!; // set in Entry
+        private ModData Data = null!; // set in Entry
 
 
         /*********
@@ -39,21 +43,22 @@ namespace DonCami.Stardew.TreasuryFarm
             I18n.Init(helper.Translation);
 
             // read config & data
-            this._config = this.Helper.ReadConfig<ModConfig>();
-            this._data = this.LoadModData();
+            this.Config = this.Helper.ReadConfig<ModConfig>();
+            this.Data = this.LoadModData();
 
             // hook events
             helper.Events.Content.AssetRequested += this.OnAssetRequested;
             helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
-
+            helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
+            
             // hook Harmony patch
             HarmonyPatcher.Apply(this,
                 new FarmPatcher(
-                    config: this._config,
+                    config: this.Config,
                     isTreasuryFarm: this.IsTreasuryFarm
                 ),
                 new CharacterCustomizationPatcher(
-                    config: this._config, 
+                    config: this.Config, 
                     farmTypeId: this.ModManifest.UniqueID
                 )
             );
@@ -101,12 +106,12 @@ namespace DonCami.Stardew.TreasuryFarm
             }
 
             // add farm location data
-            else if (e.NameWithoutLocale.IsEquivalentTo("Data/Locations") && this._data.LocationData != null)
+            else if (e.NameWithoutLocale.IsEquivalentTo("Data/Locations") && this.Data.LocationData != null)
             {
                 e.Edit(editor =>
                 {
                     var data = editor.AsDictionary<string, LocationData>().Data;
-                    data[$"Farm_{this.ModManifest.UniqueID}"] = this._data.LocationData;
+                    data[$"Farm_{this.ModManifest.UniqueID}"] = this.Data.LocationData;
                 });
             }
 
@@ -131,15 +136,15 @@ namespace DonCami.Stardew.TreasuryFarm
         /// <param name="e">The event data.</param>
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
-            // add Generic Mod _config Menu integration
+            // add Generic Mod Config Menu integration
             new GenericModConfigMenuIntegrationForTreasuryFarm(
-                getConfig: () => this._config,
+                getConfig: () => this.Config,
                 reset: () =>
                 {
-                    this._config = new ModConfig();
-                    this.Helper.WriteConfig(this._config);
+                    this.Config = new ModConfig();
+                    this.Helper.WriteConfig(this.Config);
                 },
-                saveAndApply: () => this.Helper.WriteConfig(this._config),
+                saveAndApply: () => this.Helper.WriteConfig(this.Config),
                 modRegistry: this.Helper.ModRegistry,
                 monitor: this.Monitor,
                 manifest: this.ModManifest
@@ -180,6 +185,11 @@ namespace DonCami.Stardew.TreasuryFarm
             data.LocationData = null;
 
             return data;
+        }
+        
+        private void OnSaveLoaded(object sender, EventArgs e)
+        {
+            TerrainFeaturesManager.CheckAndManageBushes();
         }
     }
 }

@@ -1,4 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <Target Name="PrintSolutionDir" BeforeTargets="BeforeBuild">
+        <Message Text="SolutionDir: $(SolutionDir)" Importance="High" />
+    </Target>
     <PropertyGroup>
         <Authors>DonCami</Authors>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
