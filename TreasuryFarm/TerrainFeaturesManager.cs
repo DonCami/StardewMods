@@ -8,15 +8,15 @@ namespace DonCami.Stardew.TreasuryFarm;
 
 public static class TerrainFeaturesManager
 {
-    private const string ExpansionOneName = "DonCami.TreasuryFarm.ExtensionOne";
+    private const string ExtensionOneName = "DonCami.TreasuryFarm.ExtensionOne";
     
     public static void CheckAndManageBushes()
     {
         var farmLocation = Game1.getLocationFromName("Farm");
-        var expansionOne = Game1.getLocationFromName(ExpansionOneName);
+        var extensionOne = Game1.getLocationFromName(ExtensionOneName);
         
         if (farmLocation == null) return;
-        if (expansionOne != null)
+        if (extensionOne != null)
         {
             RemoveBushes(farmLocation, FarmToExpansionOneBushes());
             AddWarps(farmLocation, FarmToExpansionOneWarps());
@@ -59,9 +59,9 @@ public static class TerrainFeaturesManager
     {
         return
         [
-            new Warp(-1, 24, ExpansionOneName, 154, 105, false),
-            new Warp(-1, 25, ExpansionOneName, 154, 106, false),
-            new Warp(-1, 26, ExpansionOneName, 154, 107, false)
+            new Warp(-1, 24, ExtensionOneName, 154, 105, false),
+            new Warp(-1, 25, ExtensionOneName, 154, 106, false),
+            new Warp(-1, 26, ExtensionOneName, 154, 107, false)
         ];
     }
 

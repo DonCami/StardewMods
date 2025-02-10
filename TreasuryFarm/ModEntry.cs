@@ -5,6 +5,7 @@ using Pathoschild.Stardew.Common;
 using Pathoschild.Stardew.Common.Patching;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
 using DonCami.Stardew.TreasuryFarm.Patches;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -183,9 +184,16 @@ namespace DonCami.Stardew.TreasuryFarm
             return data;
         }
         
-        private static void OnSaveLoaded(object? sender, SaveLoadedEventArgs saveLoadedEventArgs)
+        private void OnSaveLoaded(object? sender, SaveLoadedEventArgs saveLoadedEventArgs)
         {
             TerrainFeaturesManager.CheckAndManageBushes();
+            var extensionOne = Game1.getLocationFromName("DonCami.TreasuryFarm.ExtensionOne");
+            if (extensionOne != null)
+            {
+                Monitor.Log(
+                    "Treasury Farm Extension One loaded successfully.",
+                    LogLevel.Info);
+            }
         }
     }
 }

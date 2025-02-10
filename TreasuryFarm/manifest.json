@@ -1,7 +1,7 @@
 {
   "Name": "Treasury Farm",
   "Author": "Don Cami",
-  "Version": "0.0.6",
+  "Version": "0.0.7",
   "Description": "A Treasury Forest Farm.",
   "UniqueID": "DonCami.TreasuryFarm",
   "MinimumApiVersion": "4.0.7",
