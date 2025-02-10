@@ -8,7 +8,7 @@ namespace DonCami.Stardew.TreasuryFarm;
 
 public static class TerrainFeaturesManager
 {
-    private const string ExpansionOneName = "DonCami.TreasuryFarm.ExpansionOne";
+    private const string ExpansionOneName = "DonCami.TreasuryFarm.ExtensionOne";
     
     public static void CheckAndManageBushes()
     {
