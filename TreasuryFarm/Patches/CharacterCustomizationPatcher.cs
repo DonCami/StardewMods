@@ -29,16 +29,16 @@ internal class CharacterCustomizationPatcher : BasePatcher
     /// <param name="farmTypeId">The farm type ID for Treasury Farm.</param>
     public CharacterCustomizationPatcher(ModConfig config, string farmTypeId)
     {
-        Config = config;
-        FarmTypeId = farmTypeId;
+        CharacterCustomizationPatcher.Config = config;
+        CharacterCustomizationPatcher.FarmTypeId = farmTypeId;
     }
 
     /// <inheritdoc />
     public override void Apply(Harmony harmony, IMonitor monitor)
     {
         harmony.Patch(
-            RequireMethod<CharacterCustomization>("optionButtonClick"),
-            postfix: GetHarmonyMethod(nameof(After_OptionButtonClick))
+            original: this.RequireMethod<CharacterCustomization>("optionButtonClick"),
+            postfix: this.GetHarmonyMethod(nameof(CharacterCustomizationPatcher.After_OptionButtonClick))
         );
     }
 
@@ -52,10 +52,10 @@ internal class CharacterCustomizationPatcher : BasePatcher
     [SuppressMessage("ReSharper", "InconsistentNaming", Justification = "The naming convention is defined by Harmony.")]
     private static void After_OptionButtonClick(CharacterCustomization __instance, string name)
     {
-        if (name != $"ModFarm_{FarmTypeId}")
+        if (name != $"ModFarm_{CharacterCustomizationPatcher.FarmTypeId}")
             return;
 
         // apply default options
-        Game1.spawnMonstersAtNight = Config.DefaultSpawnMonstersAtNight;
+        Game1.spawnMonstersAtNight = CharacterCustomizationPatcher.Config.DefaultSpawnMonstersAtNight;
     }
 }
