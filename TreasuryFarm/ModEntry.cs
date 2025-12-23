@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using DonCami.Stardew.TreasuryFarm.Framework;
 using DonCami.Stardew.Common;
+using DonCami.Stardew.Common.Integrations.GenericModConfigMenu;
 using DonCami.Stardew.Common.Patching;
+using DonCami.Stardew.TreasuryFarm.Framework;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
 using DonCami.Stardew.TreasuryFarm.Patches;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -13,8 +13,8 @@ using StardewValley.GameData;
 using StardewValley.GameData.Locations;
 using xTile;
 
-namespace DonCami.Stardew.TreasuryFarm
-{
+namespace DonCami.Stardew.TreasuryFarm;
+
     /// <summary>The mod entry class loaded by SMAPI.</summary>
     public class ModEntry : Mod
     {
@@ -39,24 +39,24 @@ namespace DonCami.Stardew.TreasuryFarm
         {
             I18n.Init(helper.Translation);
 
-            // read config & data
-            Config = Helper.ReadConfig<ModConfig>();
-            Data = LoadModData();
+        // read config & data
+        this.Config = this.Helper.ReadConfig<ModConfig>();
+        this.Data = this.LoadModData();
 
             // hook events
-            helper.Events.Content.AssetRequested += OnAssetRequested;
-            helper.Events.GameLoop.GameLaunched += OnGameLaunched;
-            helper.Events.GameLoop.SaveLoaded += OnSaveLoaded;
+            helper.Events.Content.AssetRequested += this.OnAssetRequested;
+            helper.Events.GameLoop.GameLaunched += this.OnGameLaunched;
+            helper.Events.GameLoop.SaveLoaded += this.OnSaveLoaded;
             
             // hook Harmony patch
             HarmonyPatcher.Apply(this,
                 new FarmPatcher(
-                    config: Config,
-                    isTreasuryFarm: IsTreasuryFarm
+                    config: this.Config,
+                    isTreasuryFarm: this.IsTreasuryFarm
                 ),
                 new CharacterCustomizationPatcher(
-                    config: Config, 
-                    farmTypeId: ModManifest.UniqueID
+                    config: this.Config, 
+                    farmTypeId: this.ModManifest.UniqueID
                 )
             );
         }
@@ -134,18 +134,11 @@ namespace DonCami.Stardew.TreasuryFarm
         private void OnGameLaunched(object? sender, GameLaunchedEventArgs e)
         {
             // add Generic Mod Config Menu integration
-            new GenericModConfigMenuIntegrationForTreasuryFarm(
-                getConfig: () => Config,
-                reset: () =>
-                {
-                    Config = new ModConfig();
-                    Helper.WriteConfig(Config);
-                },
-                saveAndApply: () => Helper.WriteConfig(Config),
-                modRegistry: Helper.ModRegistry,
-                monitor: Monitor,
-                manifest: ModManifest
-            ).Register();
+            this.AddGenericModConfigMenu(
+                new GenericModConfigMenuIntegrationForTreasuryFarm(),
+                get: () => this.Config,
+                set: config => this.Config = config
+            );
         }
 
         /// <summary>Get whether the given location is the Treasury Farm.</summary>
@@ -153,7 +146,7 @@ namespace DonCami.Stardew.TreasuryFarm
         private bool IsTreasuryFarm(GameLocation? location)
         {
             return
-                Game1.whichModFarm?.Id == ModManifest.UniqueID
+                Game1.whichModFarm?.Id == this.ModManifest.UniqueID
                 && location?.Name == "Farm"
                 && location is Farm;
         }
@@ -166,22 +159,20 @@ namespace DonCami.Stardew.TreasuryFarm
             var dataPath = Path.Combine(Helper.DirectoryPath, "assets", "data.json");
             if (data == null || !File.Exists(dataPath))
             {
-                Monitor.Log(
+                this.Monitor.Log(
                     "The mod's 'assets/data.json' file is missing, so this mod can't work correctly. Please reinstall the mod to fix ",
                     LogLevel.Error);
                 return new ModData();
             }
 
             if (CommonHelper.GetFileHash(dataPath) != ModEntry.DataFileHash)
-                Monitor.Log("Found edits to 'assets/data.json'.");
+                this.Monitor.Log("Found edits to 'assets/data.json'.");
 
             if (data.LocationData is not null) return data;
-            Monitor.Log(
-                "The mod's 'assets/data.json' file has invalid location data, so this mod can't work correctly. Please reinstall the mod to fix ",
-                LogLevel.Error);
-            data.LocationData = null;
+            this.Monitor.Log("The mod's 'assets/data.json' file has invalid location data, so this mod can't work correctly. Please reinstall the mod to fix this.", LogLevel.Error);
+        data.LocationData = null;
 
-            return data;
+        return data;
         }
         
         private void OnSaveLoaded(object? sender, SaveLoadedEventArgs saveLoadedEventArgs)
@@ -196,4 +187,3 @@ namespace DonCami.Stardew.TreasuryFarm
             }
         }
     }
-}
