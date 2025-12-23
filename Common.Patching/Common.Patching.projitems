@@ -3,7 +3,7 @@
     <PropertyGroup>
         <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
         <HasSharedItems>true</HasSharedItems>
-        <SharedGUID>49c40e04-5a9f-47da-8906-fa717816e772</SharedGUID>
+        <SharedGUID>f7657ebf-865c-49f5-8176-d79d95d0781a</SharedGUID>
     </PropertyGroup>
     <PropertyGroup Label="Configuration">
         <Import_RootNamespace>Common.Patching</Import_RootNamespace>
