@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using DonCami.Stardew.TreasuryFarm.Framework;
-using Pathoschild.Stardew.Common;
-using Pathoschild.Stardew.Common.Patching;
+using DonCami.Stardew.Common;
+using DonCami.Stardew.Common.Patching;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
 using DonCami.Stardew.TreasuryFarm.Patches;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
