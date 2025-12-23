@@ -10,5 +10,6 @@
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="$(MSBuildThisFileDirectory)BasePatcher.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatcher.cs" />
     </ItemGroup>
 </Project>
