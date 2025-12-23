@@ -1,0 +1,14 @@
+﻿<Solution>
+    <Folder Name="/root/">
+        <File Path=".editorconfig" />
+        <File Path=".gitattributes" />
+        <File Path=".gitignore" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Packages.props" />
+        <File Path="LICENSE" />
+        <File Path="README.md" />
+    </Folder>
+    <Project Path="Common.Patching/.Common.Patching.shproj" Id="49c40e04-5a9f-47da-8906-fa717816e772" />
+    <Project Path="Common/.Common.shproj" Id="f7657ebf-865c-49f5-8176-d79d95d0781a" />
+    <Project Path="TreasuryFarm/TreasuryFarm.csproj" />
+</Solution>
