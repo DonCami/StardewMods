@@ -5,15 +5,15 @@ using StardewValley;
 namespace DonCami.Stardew.Common.UI;
 
 /// <summary>Simplifies access to the game's sprite sheets.</summary>
-/// <remarks>Each sprite is represented by a rectangle, which specifies the coordinates and dimensions of the image in the sprite sheet.</remarks>
+/// <remarks>
+///     Each sprite is represented by a rectangle, which specifies the coordinates and dimensions of the image in the
+///     sprite sheet.
+/// </remarks>
 internal static class CommonSprites
 {
     /// <summary>Sprites used to draw a button.</summary>
     public static class Button
     {
-        /// <summary>The sprite sheet containing the icon sprites.</summary>
-        public static Texture2D Sheet => Game1.mouseCursors;
-
         /// <summary>The legend background.</summary>
         public static readonly Rectangle Background = new(297, 364, 1, 1);
 
@@ -40,6 +40,9 @@ internal static class CommonSprites
 
         /// <summary>The bottom-right corner.</summary>
         public static readonly Rectangle BottomRight = new(286, 296, 4, 4);
+
+        /// <summary>The sprite sheet containing the icon sprites.</summary>
+        public static Texture2D Sheet => Game1.mouseCursors;
     }
 
     /// <summary>Sprites used to draw a dropdown list.</summary>
@@ -61,9 +64,6 @@ internal static class CommonSprites
     /// <summary>Sprites used to draw icons.</summary>
     public static class Icons
     {
-        /// <summary>The sprite sheet containing the icon sprites.</summary>
-        public static Texture2D Sheet => Game1.mouseCursors;
-
         /// <summary>A down arrow.</summary>
         public static readonly Rectangle DownArrow = new(12, 76, 40, 44);
 
@@ -96,14 +96,14 @@ internal static class CommonSprites
 
         /// <summary>A stardrop icon.</summary>
         public static readonly Rectangle Stardrop = new(346, 392, 8, 8);
+
+        /// <summary>The sprite sheet containing the icon sprites.</summary>
+        public static Texture2D Sheet => Game1.mouseCursors;
     }
 
     /// <summary>Sprites used to draw a scroll.</summary>
     public static class Scroll
     {
-        /// <summary>The sprite sheet containing the icon sprites.</summary>
-        public static Texture2D Sheet => Game1.mouseCursors;
-
         /// <summary>The legend background.</summary>
         public static readonly Rectangle Background = new(334, 321, 1, 1);
 
@@ -130,6 +130,9 @@ internal static class CommonSprites
 
         /// <summary>The bottom-right corner.</summary>
         public static readonly Rectangle BottomRight = new(344, 334, 6, 2);
+
+        /// <summary>The sprite sheet containing the icon sprites.</summary>
+        public static Texture2D Sheet => Game1.mouseCursors;
     }
 
     /// <summary>Sprites used to draw a tab.</summary>

@@ -1,12 +1,7 @@
 ﻿{
-
-    "farm.name": "Treasury Farm",
-    "farm.description": "A Large Farm, with Forest Farm benefits.",
-    
-    
-    "config.farm-options-section": "Farm options",
-
-    "config.spawn-monsters.name": "Spawn monsters by default",
-    "config.spawn-monsters.tooltip": "The default value for the 'spawn monsters at night' option when creating a new save. You can still change the option when creating a new save. This has no effect on existing saves."
-
+  "farm.name": "Treasury Farm",
+  "farm.description": "A Large Farm, with Forest Farm benefits.",
+  "config.farm-options-section": "Farm options",
+  "config.spawn-monsters.name": "Spawn monsters by default",
+  "config.spawn-monsters.tooltip": "The default value for the 'spawn monsters at night' option when creating a new save. You can still change the option when creating a new save. This has no effect on existing saves."
 }

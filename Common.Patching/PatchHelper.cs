@@ -10,8 +10,8 @@ namespace DonCami.Stardew.Common.Patching;
 internal static class PatchHelper
 {
     /*********
-    ** Public methods
-    *********/
+     ** Public methods
+     *********/
     /// <summary>Get a constructor and assert that it was found.</summary>
     /// <typeparam name="TTarget">The type containing the method.</typeparam>
     /// <param name="parameters">The method parameter types, or <c>null</c> if it's not overloaded.</param>
@@ -20,7 +20,8 @@ internal static class PatchHelper
     {
         return
             AccessTools.Constructor(typeof(TTarget), parameters)
-            ?? throw new InvalidOperationException($"Can't find constructor {PatchHelper.GetMethodString(typeof(TTarget), null, parameters)} to patch.");
+            ?? throw new InvalidOperationException(
+                $"Can't find constructor {GetMethodString(typeof(TTarget), null, parameters)} to patch.");
     }
 
     /// <summary>Get a method and assert that it was found.</summary>
@@ -33,7 +34,8 @@ internal static class PatchHelper
     {
         return
             AccessTools.Method(typeof(TTarget), name, parameters, generics)
-            ?? throw new InvalidOperationException($"Can't find method {PatchHelper.GetMethodString(typeof(TTarget), name, parameters, generics)} to patch.");
+            ?? throw new InvalidOperationException(
+                $"Can't find method {GetMethodString(typeof(TTarget), name, parameters, generics)} to patch.");
     }
 
     /// <summary>Get a human-readable representation of a method target.</summary>

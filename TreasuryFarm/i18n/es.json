@@ -1,12 +1,7 @@
 ﻿{
-
-    "farm.name": "Hacienda",
-    "farm.description": "Una enorme granja con las ventajas de la granja forestal.",
-
-
-    "config.farm-options-section": "Opciones de granja",
-
-    "config.spawn-monsters.name": "Aparición de monstruos",
-    "config.spawn-monsters.tooltip": "El valor por defecto para 'aparición de monstruos durante la noche' cuando se crea una nueva partida. Aún se puede cambiar la opción al crear un nuevo guardado. Esto no afecta a los guardados existentes."
-
+  "farm.name": "Hacienda",
+  "farm.description": "Una enorme granja con las ventajas de la granja forestal.",
+  "config.farm-options-section": "Opciones de granja",
+  "config.spawn-monsters.name": "Aparición de monstruos",
+  "config.spawn-monsters.tooltip": "El valor por defecto para 'aparición de monstruos durante la noche' cuando se crea una nueva partida. Aún se puede cambiar la opción al crear un nuevo guardado. Esto no afecta a los guardados existentes."
 }

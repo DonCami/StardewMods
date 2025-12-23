@@ -2,16 +2,16 @@
     <PropertyGroup>
         <Version>0.0.8</Version>
         <RootNamespace>DonCami.Stardew.TreasuryFarm</RootNamespace>
-        
+
         <EnableHarmony>true</EnableHarmony>
         <IgnoreModFilePaths>assets/paths.png, assets/spring_outdoorsTileSheet.png, assets/spring_outdoorsTileSheet2.png, assets/spring_town.png</IgnoreModFilePaths>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" />
-        <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder" />
+        <PackageReference Include="Pathoschild.Stardew.ModBuildConfig"/>
+        <PackageReference Include="Pathoschild.Stardew.ModTranslationClassBuilder"/>
     </ItemGroup>
 
-    <Import Project="..\Common\Common.projitems" Label="Shared" />
-    <Import Project="..\Common.Patching\Common.Patching.projitems" Label="Shared" />
+    <Import Project="..\Common\Common.projitems" Label="Shared"/>
+    <Import Project="..\Common.Patching\Common.Patching.projitems" Label="Shared"/>
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using Netcode;
 using StardewValley;
 using StardewValley.TerrainFeatures;
@@ -9,12 +10,12 @@ namespace DonCami.Stardew.TreasuryFarm;
 public static class TerrainFeaturesManager
 {
     private const string ExtensionOneName = "DonCami.TreasuryFarm.ExtensionOne";
-    
+
     public static void CheckAndManageBushes()
     {
         var farmLocation = Game1.getLocationFromName("Farm");
         var extensionOne = Game1.getLocationFromName(ExtensionOneName);
-        
+
         if (farmLocation == null) return;
         if (extensionOne != null)
         {
@@ -30,31 +31,28 @@ public static class TerrainFeaturesManager
     private static void RemoveBushes(GameLocation location, List<NetVector2> bushes)
     {
         foreach (var bush in bushes
-                     .Select(
-                         bushTile => 
-                             location.largeTerrainFeatures
-                                 .OfType<Bush>()
-                                 .FirstOrDefault(b => b.netTilePosition == bushTile)
+                     .Select(bushTile =>
+                         location.largeTerrainFeatures
+                             .OfType<Bush>()
+                             .FirstOrDefault(b => b.netTilePosition == bushTile)
                      )
                      .OfType<Bush>()
                 )
-        {
             location.largeTerrainFeatures.Remove(bush);
-        }
     }
-    
+
     private static void AddBushes(GameLocation location, List<NetVector2> bushes)
     {
-        foreach (var bushTile in from bushTile in bushes let bush = location.largeTerrainFeatures
+        foreach (var bushTile in from bushTile in bushes
+                 let bush = location.largeTerrainFeatures
                      .OfType<Bush>()
-                     .FirstOrDefault(b => b.netTilePosition == bushTile) where bush == null select bushTile)
-        {
-            location.largeTerrainFeatures.Add(new Bush(bushTile.Value,1,location,1));
-        }
+                     .FirstOrDefault(b => b.netTilePosition == bushTile)
+                 where bush == null
+                 select bushTile)
+            location.largeTerrainFeatures.Add(new Bush(bushTile.Value, 1, location, 1));
     }
-    
-    
-    
+
+
     private static List<Warp> FarmToExpansionOneWarps()
     {
         return
@@ -68,21 +66,18 @@ public static class TerrainFeaturesManager
     private static List<NetVector2> FarmToExpansionOneBushes()
     {
         return
-            [
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(1, 24)),
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(1, 25)),
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(1, 26)),
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(2, 24)),
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(2, 25)),
-            new NetVector2(new Microsoft.Xna.Framework.Vector2(2, 26))
+        [
+            new NetVector2(new Vector2(1, 24)),
+            new NetVector2(new Vector2(1, 25)),
+            new NetVector2(new Vector2(1, 26)),
+            new NetVector2(new Vector2(2, 24)),
+            new NetVector2(new Vector2(2, 25)),
+            new NetVector2(new Vector2(2, 26))
         ];
     }
-    
+
     private static void AddWarps(GameLocation location, List<Warp> warps)
     {
-        foreach (var warp in warps)
-        {
-            location.warps.Add(warp);
-        }
+        foreach (var warp in warps) location.warps.Add(warp);
     }
 }

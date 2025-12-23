@@ -7,5 +7,7 @@
   "MinimumApiVersion": "4.0.7",
   "MinimumGameVersion": "1.6.4",
   "EntryDll": "TreasuryFarm.dll",
-  "UpdateKeys": ["Nexus:26447"]
+  "UpdateKeys": [
+    "Nexus:26447"
+  ]
 }

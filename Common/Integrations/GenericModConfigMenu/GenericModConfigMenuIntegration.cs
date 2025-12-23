@@ -10,8 +10,8 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     where TConfig : new()
 {
     /*********
-    ** Fields
-    *********/
+     ** Fields
+     *********/
     /// <summary>The manifest for the mod consuming the API.</summary>
     private readonly IManifest ConsumerManifest;
 
@@ -26,8 +26,8 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
 
 
     /*********
-    ** Public methods
-    *********/
+     ** Public methods
+     *********/
     /// <summary>Construct an instance.</summary>
     /// <param name="modRegistry">An API for fetching metadata about loaded mods.</param>
     /// <param name="monitor">Encapsulates monitoring and logging.</param>
@@ -35,35 +35,39 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="getConfig">Get the current config model.</param>
     /// <param name="reset">Reset the mod's config to its default values.</param>
     /// <param name="saveAndApply">Save the mod's current config to the <c>config.json</c> file.</param>
-    public GenericModConfigMenuIntegration(IModRegistry modRegistry, IMonitor monitor, IManifest manifest, Func<TConfig> getConfig, Action reset, Action saveAndApply)
+    public GenericModConfigMenuIntegration(IModRegistry modRegistry, IMonitor monitor, IManifest manifest,
+        Func<TConfig> getConfig, Action reset, Action saveAndApply)
         : base("Generic Mod Config Menu", "spacechase0.GenericModConfigMenu", "1.9.6", modRegistry, monitor)
     {
-        this.ConsumerManifest = manifest;
-        this.GetConfig = getConfig;
-        this.Reset = reset;
-        this.SaveAndApply = saveAndApply;
+        ConsumerManifest = manifest;
+        GetConfig = getConfig;
+        Reset = reset;
+        SaveAndApply = saveAndApply;
     }
 
     /// <summary>Register the mod config.</summary>
     /// <param name="titleScreenOnly">Whether the options can only be edited from the title screen.</param>
     public GenericModConfigMenuIntegration<TConfig> Register(bool titleScreenOnly = false)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
-        this.ModApi.Unregister(this.ConsumerManifest);
-        this.ModApi.Register(this.ConsumerManifest, this.Reset, this.SaveAndApply, titleScreenOnly);
+        ModApi.Unregister(ConsumerManifest);
+        ModApi.Register(ConsumerManifest, Reset, SaveAndApply, titleScreenOnly);
 
         return this;
     }
 
     /// <summary>Add a section title at the current position in the form.</summary>
     /// <param name="text">The title text shown in the form.</param>
-    /// <param name="tooltip">The tooltip text shown when the cursor hovers on the title, or <c>null</c> to disable the tooltip.</param>
+    /// <param name="tooltip">
+    ///     The tooltip text shown when the cursor hovers on the title, or <c>null</c> to disable the
+    ///     tooltip.
+    /// </param>
     public GenericModConfigMenuIntegration<TConfig> AddSectionTitle(Func<string> text, Func<string>? tooltip = null)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
-        this.ModApi.AddSectionTitle(this.ConsumerManifest, text, tooltip);
+        ModApi.AddSectionTitle(ConsumerManifest, text, tooltip);
 
         return this;
     }
@@ -72,9 +76,9 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="text">The paragraph text to display.</param>
     public GenericModConfigMenuIntegration<TConfig> AddParagraph(Func<string> text)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
-        this.ModApi.AddParagraph(this.ConsumerManifest, text);
+        ModApi.AddParagraph(ConsumerManifest, text);
 
         return this;
     }
@@ -85,20 +89,19 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="get">Get the current value from the mod config.</param>
     /// <param name="set">Set a new value in the mod config.</param>
     /// <param name="enable">Whether the field is enabled.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddCheckbox(Func<string> name, Func<string> tooltip, Func<TConfig, bool> get, Action<TConfig, bool> set, bool enable = true)
+    public GenericModConfigMenuIntegration<TConfig> AddCheckbox(Func<string> name, Func<string> tooltip,
+        Func<TConfig, bool> get, Action<TConfig, bool> set, bool enable = true)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddBoolOption(
-                mod: this.ConsumerManifest,
+            ModApi.AddBoolOption(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val)
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val)
             );
-        }
 
         return this;
     }
@@ -109,24 +112,27 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="get">Get the current value from the mod config.</param>
     /// <param name="set">Set a new value in the mod config.</param>
     /// <param name="allowedValues">The values that can be selected.</param>
-    /// <param name="formatAllowedValue">Get the display text to show for a value from <paramref name="allowedValues"/>, or <c>null</c> to show the values as-is.</param>
+    /// <param name="formatAllowedValue">
+    ///     Get the display text to show for a value from <paramref name="allowedValues" />, or
+    ///     <c>null</c> to show the values as-is.
+    /// </param>
     /// <param name="enable">Whether the field is enabled.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddDropdown(Func<string> name, Func<string> tooltip, Func<TConfig, string> get, Action<TConfig, string> set, string[] allowedValues, Func<string, string> formatAllowedValue, bool enable = true)
+    public GenericModConfigMenuIntegration<TConfig> AddDropdown(Func<string> name, Func<string> tooltip,
+        Func<TConfig, string> get, Action<TConfig, string> set, string[] allowedValues,
+        Func<string, string> formatAllowedValue, bool enable = true)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddTextOption(
-                mod: this.ConsumerManifest,
+            ModApi.AddTextOption(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val),
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val),
                 allowedValues: allowedValues,
                 formatAllowedValue: formatAllowedValue
             );
-        }
 
         return this;
     }
@@ -137,20 +143,19 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="get">Get the current value from the mod config.</param>
     /// <param name="set">Set a new value in the mod config.</param>
     /// <param name="enable">Whether the field is enabled.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddTextbox(Func<string> name, Func<string> tooltip, Func<TConfig, string> get, Action<TConfig, string> set, bool enable = true)
+    public GenericModConfigMenuIntegration<TConfig> AddTextbox(Func<string> name, Func<string> tooltip,
+        Func<TConfig, string> get, Action<TConfig, string> set, bool enable = true)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddTextOption(
-                mod: this.ConsumerManifest,
+            ModApi.AddTextOption(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val)
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val)
             );
-        }
 
         return this;
     }
@@ -163,22 +168,21 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="min">The minimum allowed value.</param>
     /// <param name="max">The maximum allowed value.</param>
     /// <param name="enable">Whether the field is enabled.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddNumberField(Func<string> name, Func<string> tooltip, Func<TConfig, int> get, Action<TConfig, int> set, int min, int max, bool enable = true)
+    public GenericModConfigMenuIntegration<TConfig> AddNumberField(Func<string> name, Func<string> tooltip,
+        Func<TConfig, int> get, Action<TConfig, int> set, int min, int max, bool enable = true)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddNumberOption(
-                mod: this.ConsumerManifest,
+            ModApi.AddNumberOption(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val),
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val),
                 min: min,
                 max: max
             );
-        }
 
         return this;
     }
@@ -192,23 +196,23 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="max">The maximum allowed value.</param>
     /// <param name="enable">Whether the field is enabled.</param>
     /// <param name="interval">The interval of values that can be selected.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddNumberField(Func<string> name, Func<string> tooltip, Func<TConfig, float> get, Action<TConfig, float> set, float min, float max, bool enable = true, float interval = 0.1f)
+    public GenericModConfigMenuIntegration<TConfig> AddNumberField(Func<string> name, Func<string> tooltip,
+        Func<TConfig, float> get, Action<TConfig, float> set, float min, float max, bool enable = true,
+        float interval = 0.1f)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddNumberOption(
-                mod: this.ConsumerManifest,
+            ModApi.AddNumberOption(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val),
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val),
                 min: min,
                 max: max,
                 interval: interval
             );
-        }
 
         return this;
     }
@@ -219,20 +223,19 @@ internal class GenericModConfigMenuIntegration<TConfig> : BaseIntegration<IGener
     /// <param name="get">Get the current value from the mod config.</param>
     /// <param name="set">Set a new value in the mod config.</param>
     /// <param name="enable">Whether the field is enabled.</param>
-    public GenericModConfigMenuIntegration<TConfig> AddKeyBinding(Func<string> name, Func<string> tooltip, Func<TConfig, KeybindList> get, Action<TConfig, KeybindList> set, bool enable = true)
+    public GenericModConfigMenuIntegration<TConfig> AddKeyBinding(Func<string> name, Func<string> tooltip,
+        Func<TConfig, KeybindList> get, Action<TConfig, KeybindList> set, bool enable = true)
     {
-        this.AssertLoaded();
+        AssertLoaded();
 
         if (enable)
-        {
-            this.ModApi.AddKeybindList(
-                mod: this.ConsumerManifest,
+            ModApi.AddKeybindList(
+                ConsumerManifest,
                 name: name,
                 tooltip: tooltip,
-                getValue: () => get(this.GetConfig()),
-                setValue: val => set(this.GetConfig(), val)
+                getValue: () => get(GetConfig()),
+                setValue: val => set(GetConfig(), val)
             );
-        }
 
         return this;
     }
@@ -248,7 +251,9 @@ internal static class GenericModConfigMenuIntegration
     /// <param name="get">Get the current config model.</param>
     /// <param name="set">Overwrite the current config model.</param>
     /// <param name="onSaved">Apply the config changes after they've been saved.</param>
-    public static void AddGenericModConfigMenu<TConfig>(this IMod mod, IGenericModConfigMenuIntegrationFor<TConfig> configMenu, Func<TConfig> get, Action<TConfig> set, Action? onSaved = null)
+    public static void AddGenericModConfigMenu<TConfig>(this IMod mod,
+        IGenericModConfigMenuIntegrationFor<TConfig> configMenu, Func<TConfig> get, Action<TConfig> set,
+        Action? onSaved = null)
         where TConfig : class, new()
     {
         void Reset()
@@ -263,17 +268,18 @@ internal static class GenericModConfigMenuIntegration
             onSaved?.Invoke();
         }
 
-        GenericModConfigMenuIntegration<TConfig> api = new(mod.Helper.ModRegistry, mod.Monitor, mod.ModManifest, get, Reset, SaveAndApply);
+        GenericModConfigMenuIntegration<TConfig> api = new(mod.Helper.ModRegistry, mod.Monitor, mod.ModManifest, get,
+            Reset, SaveAndApply);
         if (api.IsLoaded)
-        {
             try
             {
                 configMenu.Register(api, mod.Monitor);
             }
             catch (Exception ex)
             {
-                mod.Monitor.LogOnce($"Failed registering config menu with Generic Mod Config Menu.\n\nTechnical info:\n{ex}", LogLevel.Error);
+                mod.Monitor.LogOnce(
+                    $"Failed registering config menu with Generic Mod Config Menu.\n\nTechnical info:\n{ex}",
+                    LogLevel.Error);
             }
-        }
     }
 }

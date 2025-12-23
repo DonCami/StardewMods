@@ -4,8 +4,8 @@ namespace DonCami.Stardew.Common.Integrations;
 internal interface IModIntegration
 {
     /*********
-    ** Accessors
-    *********/
+     ** Accessors
+     *********/
     /// <summary>A human-readable name for the mod.</summary>
     string Label { get; }
 

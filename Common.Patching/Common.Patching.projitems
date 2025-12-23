@@ -9,9 +9,9 @@
         <Import_RootNamespace>Common.Patching</Import_RootNamespace>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Include="$(MSBuildThisFileDirectory)BasePatcher.cs" />
-        <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatcher.cs" />
-        <Compile Include="$(MSBuildThisFileDirectory)IPatcher.cs" />
-        <Compile Include="$(MSBuildThisFileDirectory)PatchHelper.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)BasePatcher.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatcher.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)IPatcher.cs"/>
+        <Compile Include="$(MSBuildThisFileDirectory)PatchHelper.cs"/>
     </ItemGroup>
 </Project>

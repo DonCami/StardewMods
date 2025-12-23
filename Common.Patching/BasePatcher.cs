@@ -5,19 +5,19 @@ using StardewModdingAPI;
 
 namespace DonCami.Stardew.Common.Patching;
 
-/// <summary>Provides base implementation logic for <see cref="IPatcher"/> instances.</summary>
+/// <summary>Provides base implementation logic for <see cref="IPatcher" /> instances.</summary>
 internal abstract class BasePatcher : IPatcher
 {
     /*********
-    ** Public methods
-    *********/
+     ** Public methods
+     *********/
     /// <inheritdoc />
     public abstract void Apply(Harmony harmony, IMonitor monitor);
 
 
     /*********
-    ** Protected methods
-    *********/
+     ** Protected methods
+     *********/
     /// <summary>Get a method and assert that it was found.</summary>
     /// <typeparam name="TTarget">The type containing the method.</typeparam>
     /// <param name="parameters">The method parameter types, or <c>null</c> if it's not overloaded.</param>
@@ -38,12 +38,16 @@ internal abstract class BasePatcher : IPatcher
 
     /// <summary>Get a Harmony patch method on the current patcher instance.</summary>
     /// <param name="name">The method name.</param>
-    /// <param name="priority">The patch priority to apply, usually specified using Harmony's <see cref="Priority"/> enum, or <c>null</c> to keep the default value.</param>
+    /// <param name="priority">
+    ///     The patch priority to apply, usually specified using Harmony's <see cref="Priority" /> enum, or
+    ///     <c>null</c> to keep the default value.
+    /// </param>
     protected HarmonyMethod GetHarmonyMethod(string name, int? priority = null)
     {
         var method = new HarmonyMethod(
-            AccessTools.Method(this.GetType(), name)
-            ?? throw new InvalidOperationException($"Can't find patcher method {PatchHelper.GetMethodString(this.GetType(), name)}.")
+            AccessTools.Method(GetType(), name)
+            ?? throw new InvalidOperationException(
+                $"Can't find patcher method {PatchHelper.GetMethodString(GetType(), name)}.")
         );
 
         if (priority.HasValue)
