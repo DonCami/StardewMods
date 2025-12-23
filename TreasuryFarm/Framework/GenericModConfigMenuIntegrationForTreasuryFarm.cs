@@ -1,6 +1,6 @@
 using System;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
-using Pathoschild.Stardew.Common.Integrations.GenericModConfigMenu;
+using DonCami.Stardew.Common.Integrations.GenericModConfigMenu;
 using StardewModdingAPI;
 
 namespace DonCami.Stardew.TreasuryFarm.Framework

@@ -1,6 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using HarmonyLib;
-using Pathoschild.Stardew.Common.Patching;
+using DonCami.Stardew.Common.Patching;
 using DonCami.Stardew.TreasuryFarm.Framework.Config;
 using StardewModdingAPI;
 using StardewValley;
