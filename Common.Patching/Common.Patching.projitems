@@ -11,5 +11,6 @@
     <ItemGroup>
         <Compile Include="$(MSBuildThisFileDirectory)BasePatcher.cs" />
         <Compile Include="$(MSBuildThisFileDirectory)HarmonyPatcher.cs" />
+        <Compile Include="$(MSBuildThisFileDirectory)IPatcher.cs" />
     </ItemGroup>
 </Project>
