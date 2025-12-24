@@ -1,0 +1,24 @@
+{
+  "Format": "2.4.0",
+  "Changes": [
+    {
+      "Action": "Load",
+      "Target": "Maps/DonCami.TreasuryFarm.ExtensionOne",
+      "FromFile": "assets/treasuryfarm_extensionone.tmx"
+    },
+    {
+      "Action": "EditData",
+      "Target": "Data/Locations",
+      "Entries": {
+        "DonCami.TreasuryFarm.ExtensionOne": {
+          "DisplayName": "Extension North West",
+          "CreateOnLoad": {
+            "MapPath": "Maps/DonCami.TreasuryFarm.ExtensionOne",
+            "AlwaysActive": "True"},
+          "CanPlantHere": "True",
+          "FormerLocationNames": [ "DonCami_TreasuryFarm_ExtensionOne", "DonCami_TreasuryFarm_ExpansionOne","DonCami.TreasuryFarm.ExpansionOne" ]
+        }
+      }
+    }
+  ]
+}
