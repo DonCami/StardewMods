@@ -22,7 +22,7 @@ public class ModEntry : Mod
      ** Fields
      *********/
     /// <summary>The MD5 hash for the default data.json file.</summary>
-    private const string DataFileHash = "db6d8c6fb6cc1554c091430476513727";
+    private const string DataFileHash = "2f68f6b6df33c0fb888ae5c09de91e69";
 
     /// <summary>The mod configuration.</summary>
     private ModConfig Config = null!; // set in Entry
@@ -169,13 +169,19 @@ public class ModEntry : Mod
         return data;
     }
 
+    /// <inheritdoc cref="IGameLoopEvents.SaveLoaded" />
     private void OnSaveLoaded(object? sender, SaveLoadedEventArgs saveLoadedEventArgs)
     {
         TerrainFeaturesManager.CheckAndManageBushes();
         var extensionOne = Game1.getLocationFromName("DonCami.TreasuryFarm.ExtensionOne");
+        var extensionTwo = Game1.getLocationFromName("DonCami.TreasuryFarm.ExtensionTwo");
         if (extensionOne != null)
             Monitor.Log(
                 "Treasury Farm Extension One loaded successfully.",
+                LogLevel.Info);
+        if (extensionTwo != null)
+            Monitor.Log(
+                "Treasury Farm Extension Two loaded successfully.",
                 LogLevel.Info);
     }
 }
