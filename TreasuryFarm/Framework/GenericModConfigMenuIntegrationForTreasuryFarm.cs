@@ -24,6 +24,13 @@ internal class GenericModConfigMenuIntegrationForTreasuryFarm : IGenericModConfi
                 I18n.Config_SpawnMonsters_Tooltip,
                 config => config.DefaultSpawnMonstersAtNight,
                 (config, value) => config.DefaultSpawnMonstersAtNight = value
-            );
+            )
+            .AddCheckbox(
+                I18n.Config_SpawnStumps_Name,
+                I18n.Config_SpawnStumps_Tooltip,
+                config => config.DefaultSpawnStumps,
+                (config, value) => config.DefaultSpawnStumps = value
+            )
+            ;
     }
 }

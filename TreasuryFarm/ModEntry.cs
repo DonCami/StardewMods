@@ -173,6 +173,12 @@ public class ModEntry : Mod
     private void OnSaveLoaded(object? sender, SaveLoadedEventArgs saveLoadedEventArgs)
     {
         TerrainFeaturesManager.CheckAndManageBushes();
+        if(!Config.DefaultSpawnStumps){
+            TerrainFeaturesManager.RemoveStumps();
+            Monitor.Log(
+                "Stumps removed from Treasury Farm as per configuration.",
+                LogLevel.Info);
+        }
         var extensionOne = Game1.getLocationFromName("DonCami.TreasuryFarm.ExtensionOne");
         var extensionTwo = Game1.getLocationFromName("DonCami.TreasuryFarm.ExtensionTwo");
         if (extensionOne != null)
