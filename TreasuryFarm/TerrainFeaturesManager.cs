@@ -10,22 +10,39 @@ namespace DonCami.Stardew.TreasuryFarm;
 public static class TerrainFeaturesManager
 {
     private const string ExtensionOneName = "DonCami.TreasuryFarm.ExtensionOne";
+    private const string ExtensionTwoName = "DonCami.TreasuryFarm.ExtensionTwo";
 
     public static void CheckAndManageBushes()
     {
         var farmLocation = Game1.getLocationFromName("Farm");
         var extensionOne = Game1.getLocationFromName(ExtensionOneName);
+        var extensionTwo = Game1.getLocationFromName(ExtensionTwoName);
 
         if (farmLocation == null) return;
         if (extensionOne != null)
         {
             RemoveBushes(farmLocation, FarmToExpansionOneBushes());
-            AddWarps(farmLocation, FarmToExpansionOneWarps());
         }
         else
         {
             AddBushes(farmLocation, FarmToExpansionOneBushes());
         }
+        if (extensionTwo != null)
+        {
+            RemoveBushes(farmLocation, FarmToExpansionTwoWarpZone());
+        }
+        else
+        {
+            AddBushes(farmLocation, FarmToExpansionTwoBushesDefault());
+        }
+    }
+    
+    public static void RemoveStumps()
+    {
+        var farmLocation = Game1.getLocationFromName("Farm");
+        if (farmLocation == null) return;
+
+        RemoveStumpsProperty(farmLocation);
     }
 
     private static void RemoveBushes(GameLocation location, List<NetVector2> bushes)
@@ -51,18 +68,18 @@ public static class TerrainFeaturesManager
                  select bushTile)
             location.largeTerrainFeatures.Add(new Bush(bushTile.Value, 1, location, 1));
     }
-
-
-    private static List<Warp> FarmToExpansionOneWarps()
+    
+    /// <summary>
+    /// Removes the Stumps property from the specified location's map.
+    /// </summary>
+    /// <param name="location">The game location whose map property should be modified.</param>
+    public static void RemoveStumpsProperty(GameLocation location)
     {
-        return
-        [
-            new Warp(-1, 24, ExtensionOneName, 154, 105, false),
-            new Warp(-1, 25, ExtensionOneName, 154, 106, false),
-            new Warp(-1, 26, ExtensionOneName, 154, 107, false)
-        ];
+        if (location?.map?.Properties == null) return;
+        
+        location.map.Properties.Remove("Stumps");
     }
-
+    
     private static List<NetVector2> FarmToExpansionOneBushes()
     {
         return
@@ -75,9 +92,30 @@ public static class TerrainFeaturesManager
             new NetVector2(new Vector2(2, 26))
         ];
     }
-
-    private static void AddWarps(GameLocation location, List<Warp> warps)
+    
+    private static List<NetVector2> FarmToExpansionTwoBushesDefault()
     {
-        foreach (var warp in warps) location.warps.Add(warp);
+        return
+        [
+            new NetVector2(new Vector2(2, 123)),
+            new NetVector2(new Vector2(2, 124)),
+            new NetVector2(new Vector2(2, 125)),
+        ];
+    }
+    
+    private static List<NetVector2> FarmToExpansionTwoWarpZone()
+    {
+        return
+        [
+            new NetVector2(new Vector2(1, 123)),
+            new NetVector2(new Vector2(1, 124)),
+            new NetVector2(new Vector2(1, 125)),
+            new NetVector2(new Vector2(2, 123)),
+            new NetVector2(new Vector2(2, 124)),
+            new NetVector2(new Vector2(2, 125)),
+            new NetVector2(new Vector2(3, 123)),
+            new NetVector2(new Vector2(3, 124)),
+            new NetVector2(new Vector2(3, 125))
+        ];
     }
 }
