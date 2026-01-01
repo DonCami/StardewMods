@@ -16,7 +16,26 @@
             "MapPath": "Maps/DonCami.TreasuryFarm.ExtensionOne",
             "AlwaysActive": "True"},
           "CanPlantHere": "True",
-          "FormerLocationNames": [ "DonCami_TreasuryFarm_ExtensionOne", "DonCami_TreasuryFarm_ExpansionOne","DonCami.TreasuryFarm.ExpansionOne" ]
+          "FormerLocationNames": [ "DonCamiTreasuryFarmExtensionOne", "DonCami_TreasuryFarm_ExpansionOne","DonCami.TreasuryFarm.ExpansionOne" ]
+        }
+      }
+    },
+	{
+      "Action": "Load",
+      "Target": "Maps/DonCami.TreasuryFarm.ExtensionTwo",
+      "FromFile": "assets/treasuryfarm_extensiontwo.tmx"
+    },
+	{
+      "Action": "EditData",
+      "Target": "Data/Locations",
+      "Entries": {
+        "DonCami.TreasuryFarm.ExtensionTwo": {
+          "DisplayName": "Extension South West",
+          "CreateOnLoad": {
+            "MapPath": "Maps/DonCami.TreasuryFarm.ExtensionTwo",
+            "AlwaysActive": "True"},
+          "CanPlantHere": "True",
+          "FormerLocationNames": [ "DonCamiTreasuryFarmExtensionTwo", "DonCami_TreasuryFarm_ExpansionTwo","DonCami.TreasuryFarm.ExpansionTwo" ]
         }
       }
     }
