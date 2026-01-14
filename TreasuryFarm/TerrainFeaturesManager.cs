@@ -100,6 +100,7 @@ public static class TerrainFeaturesManager
             new NetVector2(new Vector2(2, 123)),
             new NetVector2(new Vector2(2, 124)),
             new NetVector2(new Vector2(2, 125)),
+            new NetVector2(new Vector2(2, 126)),
         ];
     }
     
