@@ -15,10 +15,12 @@ public static class TerrainFeaturesManager
     public static void CheckAndManageBushes()
     {
         var farmLocation = Game1.getLocationFromName("Farm");
+
         var extensionOne = Game1.getLocationFromName(ExtensionOneName);
         var extensionTwo = Game1.getLocationFromName(ExtensionTwoName);
 
         if (farmLocation == null) return;
+
         if (extensionOne != null)
         {
             RemoveBushes(farmLocation, FarmToExpansionOneBushes());
@@ -27,6 +29,7 @@ public static class TerrainFeaturesManager
         {
             AddBushes(farmLocation, FarmToExpansionOneBushes());
         }
+
         if (extensionTwo != null)
         {
             RemoveBushes(farmLocation, FarmToExpansionTwoWarpZone());
